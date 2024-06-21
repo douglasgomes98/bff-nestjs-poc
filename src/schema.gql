@@ -2,12 +2,32 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type UserType {
-  id: String!
+type AgencyType {
+  id: ID!
   name: String!
   email: String!
 }
 
+type UserType {
+  id: String!
+  name: String!
+  email: String!
+  agency_id: String!
+  role: RoleType!
+  agency: AgencyType!
+}
+
+enum RoleType {
+  ROLE_TYPE_UNSPECIFIED
+  ROLE_TYPE_AGENT
+  ROLE_TYPE_AGENCY_ADMIN
+  ROLE_TYPE_ADMIN
+  ROLE_TYPE_CONSOLIDATOR_USER
+}
+
 type Query {
+  listAgencies: [AgencyType!]!
+  getAgencyById(id: String!): AgencyType!
   listUsers: [UserType!]!
+  getUserById(id: String!): UserType!
 }

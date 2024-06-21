@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package agencies;
+
+service AgenciesService {
+  rpc GetAgency(GetAgencyRequest) returns (GetAgencyResponse);
+  rpc CreateAgency(CreateAgencyRequest) returns (CreateAgencyResponse);
+  rpc UpdateAgency(UpdateAgencyRequest) returns (UpdateAgencyResponse);
+  rpc DeleteAgency(DeleteAgencyRequest) returns (DeleteAgencyResponse);
+  rpc ListAgencies(ListAgenciesRequest) returns (ListAgenciesResponse);
+}
+
+message Agency {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message GetAgencyRequest {
+  string id = 1;
+}
+
+message GetAgencyResponse {
+  Agency agency = 1;
+}
+
+message CreateAgencyRequest {
+  string name = 1;
+  string email = 2;
+}
+
+message CreateAgencyResponse {
+  Agency agency = 1;
+}
+
+message UpdateAgencyRequest {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message UpdateAgencyResponse {
+  Agency agency = 1;
+}
+
+message DeleteAgencyRequest {
+  string id = 1;
+}
+
+message DeleteAgencyResponse {
+  bool success = 1;
+}
+
+message ListAgenciesRequest {
+}
+
+message ListAgenciesResponse {
+  repeated Agency agencies = 1;
+}

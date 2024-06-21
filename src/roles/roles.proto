@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package roles;
+
+enum RoleType {
+  ROLE_TYPE_UNSPECIFIED = 0;
+
+  ROLE_TYPE_AGENT = 1;
+  ROLE_TYPE_AGENCY_ADMIN = 2;
+  ROLE_TYPE_ADMIN = 3;
+  ROLE_TYPE_CONSOLIDATOR_USER = 4;
+}

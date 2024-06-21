@@ -2,6 +2,8 @@ import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
 import {
+  GetUserRequest,
+  GetUserResponse,
   ListUsersResponse,
   UsersGRPCService,
   UsersService,
@@ -20,6 +22,12 @@ export class UserServiceGRPC implements OnModuleInit, UsersService {
 
   async listUsers(): Promise<ListUsersResponse> {
     const response = await lastValueFrom(this.usersService.ListUsers({}));
+
+    return response;
+  }
+
+  async getUserById({ id }: GetUserRequest): Promise<GetUserResponse> {
+    const response = await lastValueFrom(this.usersService.GetUser({ id }));
 
     return response;
   }
