@@ -1,12 +1,12 @@
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 
-import { AgencyType } from 'src/agencies/ports/agencies.types';
 import { RoleType } from 'src/grpc/generated/roles';
+import { User } from 'src/grpc/generated/users';
 
-import { UserModel } from '../core/users.domain';
+import { AgencyType } from './agencies.types';
 
 @ObjectType()
-export class UserType implements Partial<UserModel> {
+export class UserType implements Partial<User> {
   @Field()
   id: string;
   @Field()

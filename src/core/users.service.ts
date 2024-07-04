@@ -1,25 +1,21 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
+import { UsersDataSourceGRPC } from 'src/adapters/users-grpc.data-source';
 import {
   GetUserRequest,
   GetUserResponse,
   ListUsersResponse,
-  USERS_DATA_SOURCE_NAME,
-  UsersDataSource,
-} from './users.domain';
+} from 'src/grpc/generated/users';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    @Inject(USERS_DATA_SOURCE_NAME)
-    private readonly dataSource: UsersDataSource,
-  ) {}
+  constructor(private readonly dataSource: UsersDataSourceGRPC) {}
 
   async listUsers(): Promise<ListUsersResponse> {
     return this.dataSource.listUsers();
   }
 
   async getUserById({ id }: GetUserRequest): Promise<GetUserResponse> {
-    return this.dataSource.getUserById({ id });
+    return this.dataSource.getUser({ id });
   }
 }

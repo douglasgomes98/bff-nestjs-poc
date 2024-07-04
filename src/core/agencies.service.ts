@@ -1,25 +1,21 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
+import { AgenciesDataSourceGRPC } from 'src/adapters/agencies-grpc.data-source';
 import {
-  AGENCIES_DATA_SOURCE_NAME,
-  AgenciesDataSource,
   GetAgencyRequest,
   GetAgencyResponse,
   ListAgenciesResponse,
-} from './agencies.domain';
+} from 'src/grpc/generated/agencies';
 
 @Injectable()
 export class AgenciesService {
-  constructor(
-    @Inject(AGENCIES_DATA_SOURCE_NAME)
-    private readonly dataSource: AgenciesDataSource,
-  ) {}
+  constructor(private readonly dataSource: AgenciesDataSourceGRPC) {}
 
   async listAgencies(): Promise<ListAgenciesResponse> {
     return this.dataSource.listAgencies();
   }
 
   async getAgencyById({ id }: GetAgencyRequest): Promise<GetAgencyResponse> {
-    return this.dataSource.getAgencyById({ id });
+    return this.dataSource.getAgency({ id });
   }
 }

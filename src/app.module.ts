@@ -4,9 +4,9 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 
-import { AgenciesModule } from './agencies/agencies.module';
 import { GrpcModule } from './grpc/grpc.module';
-import { UsersModule } from './users/users.module';
+import { AgenciesModule } from './modules/agencies.module';
+import { UsersModule } from './modules/users.module';
 
 @Module({
   imports: [
@@ -16,7 +16,7 @@ import { UsersModule } from './users/users.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       include: [AgenciesModule, UsersModule],
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      autoSchemaFile: join(process.cwd(), 'schema.gql'),
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
