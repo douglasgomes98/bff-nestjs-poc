@@ -24,6 +24,9 @@ export const makeGrpcClientOptions = ({
     loader: {
       includeDirs: [join(__dirname, './')],
       keepCase: true,
+      enums: String,
+      oneofs: true,
+      defaults: true,
     },
   },
 });

@@ -5,13 +5,13 @@
 type AgencyType {
   id: ID!
   name: String!
-  email: String!
+  email: String
 }
 
 type UserType {
   id: String!
   name: String!
-  email: String!
+  email: String
   agency_id: String!
   role: RoleType!
   agency: AgencyType!
@@ -26,8 +26,8 @@ enum RoleType {
 }
 
 type Query {
-  listAgencies: [AgencyType!]!
-  getAgencyById(id: String!): AgencyType!
   listUsers: [UserType!]!
   getUserById(id: String!): UserType!
+  listAgencies: [AgencyType!]!
+  getAgencyById(id: String!): AgencyType!
 }

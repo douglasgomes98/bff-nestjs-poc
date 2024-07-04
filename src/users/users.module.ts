@@ -1,25 +1,21 @@
 import { Module } from '@nestjs/common';
-import { ClientsModule } from '@nestjs/microservices';
+
 import { AgenciesModule } from 'src/agencies/agencies.module';
-import { userGrpcClientOptions } from './user.grpc-client.options';
-import { UsersResolver } from './users.resolver';
-import { UserServiceGRPC } from './users.service';
+import { GrpcModule } from 'src/grpc/grpc.module';
+
+import { UsersDataSourceGRPC } from './adapters/users-grpc.data-source';
+import { USERS_DATA_SOURCE_NAME } from './core/users.domain';
+import { UsersService } from './core/users.service';
+import { UsersResolver } from './ports/users.resolver';
 
 @Module({
-  imports: [
-    ClientsModule.register([
-      {
-        name: 'USERS_PACKAGE',
-        ...userGrpcClientOptions,
-      },
-    ]),
-    AgenciesModule,
-  ],
+  imports: [GrpcModule, AgenciesModule],
   providers: [
     UsersResolver,
+    UsersService,
     {
-      provide: 'UsersService',
-      useClass: UserServiceGRPC,
+      provide: USERS_DATA_SOURCE_NAME,
+      useClass: UsersDataSourceGRPC,
     },
   ],
 })

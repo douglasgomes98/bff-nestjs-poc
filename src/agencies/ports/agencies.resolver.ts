@@ -1,14 +1,11 @@
-import { Inject } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { AgenciesService } from './agencies.interface';
+
+import { AgenciesService } from '../core/agencies.service';
 import { AgencyType } from './agencies.types';
 
 @Resolver(() => AgencyType)
 export class AgenciesResolver {
-  constructor(
-    @Inject('AgenciesService')
-    private readonly agenciesService: AgenciesService,
-  ) {}
+  constructor(private readonly agenciesService: AgenciesService) {}
 
   @Query(() => [AgencyType])
   async listAgencies() {

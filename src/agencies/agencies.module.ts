@@ -1,25 +1,22 @@
 import { Module } from '@nestjs/common';
-import { ClientsModule } from '@nestjs/microservices';
-import { agenciesGrpcClientOptions } from './agencies.grpc-client.options';
-import { AgenciesResolver } from './agencies.resolver';
-import { AgenciesServiceGRPC } from './agencies.service';
+
+import { GrpcModule } from 'src/grpc/grpc.module';
+
+import { AgenciesDataSourceGRPC } from './adapters/agencies-grpc.data-source';
+import { AGENCIES_DATA_SOURCE_NAME } from './core/agencies.domain';
+import { AgenciesService } from './core/agencies.service';
+import { AgenciesResolver } from './ports/agencies.resolver';
 
 @Module({
-  imports: [
-    ClientsModule.register([
-      {
-        name: 'AGENCIES_PACKAGE',
-        ...agenciesGrpcClientOptions,
-      },
-    ]),
-  ],
+  imports: [GrpcModule],
   providers: [
     AgenciesResolver,
+    AgenciesService,
     {
-      provide: 'AgenciesService',
-      useClass: AgenciesServiceGRPC,
+      provide: AGENCIES_DATA_SOURCE_NAME,
+      useClass: AgenciesDataSourceGRPC,
     },
   ],
-  exports: ['AgenciesService'],
+  exports: [AgenciesService],
 })
 export class AgenciesModule {}
