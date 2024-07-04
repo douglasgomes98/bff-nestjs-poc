@@ -3,5 +3,5 @@
 [] - sse
 [x] - module federation
 [x] - proto
-[] - docker
+[x] - docker
 [] - enviar metadata com user e transaction_id
