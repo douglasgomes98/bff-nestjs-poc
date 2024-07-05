@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
-import { AgenciesDataSourceGRPC } from 'src/adapters/agencies-grpc.data-source';
+import { AgenciesDataSourceGRPC } from '@adapters/agencies-grpc.data-source';
 import {
   GetAgencyRequest,
   GetAgencyResponse,
   ListAgenciesResponse,
-} from 'src/grpc/generated/agencies';
+} from '@grpc/generated/agencies';
 
 @Injectable()
 export class AgenciesService {

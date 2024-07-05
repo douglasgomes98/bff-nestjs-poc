@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
-import { UsersDataSourceGRPC } from 'src/adapters/users-grpc.data-source';
+import { UsersDataSourceGRPC } from '@adapters/users-grpc.data-source';
 import {
   GetUserRequest,
   GetUserResponse,
   ListUsersResponse,
-} from 'src/grpc/generated/users';
+} from '@grpc/generated/users';
 
 @Injectable()
 export class UsersService {

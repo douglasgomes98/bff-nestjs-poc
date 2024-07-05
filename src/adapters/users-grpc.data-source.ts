@@ -6,8 +6,8 @@ import {
   GetUserRequest,
   GetUserResponse,
   ListUsersResponse,
-} from 'src/grpc/generated/users';
-import { UsersGRPCClient } from 'src/grpc/users.grpc-client';
+} from '@grpc/generated/users';
+import { UsersGRPCClient } from '@grpc/users.grpc-client';
 
 @Injectable({ scope: Scope.REQUEST })
 export class UsersDataSourceGRPC {

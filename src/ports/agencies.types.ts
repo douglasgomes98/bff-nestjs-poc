@@ -1,6 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
-import { Agency } from 'src/grpc/generated/agencies';
+import { Agency } from '@grpc/generated/agencies';
 
 @ObjectType()
 export class AgencyType implements Partial<Agency> {

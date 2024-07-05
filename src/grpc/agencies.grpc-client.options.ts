@@ -1,6 +1,6 @@
 import { join } from 'path';
 
-import { makeGrpcClientOptions } from 'src/grpc/grpc-client.options';
+import { makeGrpcClientOptions } from '@grpc/grpc-client.options';
 
 import { AGENCIES_PACKAGE_NAME } from './generated/agencies';
 

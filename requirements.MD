@@ -5,3 +5,5 @@
 [x] - proto
 [x] - docker
 [] - enviar metadata com user e transaction_id
+[] - error handling
+[] - logger

@@ -2,12 +2,12 @@ import { Injectable, Scope } from '@nestjs/common';
 import * as Dataloader from 'dataloader';
 import { lastValueFrom } from 'rxjs';
 
-import { AgenciesGRPCClient } from 'src/grpc/agencies.grpc-client';
+import { AgenciesGRPCClient } from '@grpc/agencies.grpc-client';
 import {
   GetAgencyRequest,
   GetAgencyResponse,
   ListAgenciesResponse,
-} from 'src/grpc/generated/agencies';
+} from '@grpc/generated/agencies';
 
 @Injectable({ scope: Scope.REQUEST })
 export class AgenciesDataSourceGRPC {

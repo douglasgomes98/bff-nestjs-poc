@@ -31,7 +31,14 @@ module.exports = {
         newlinesBetween: 'always',
         groups: [
           ['/^@nestjs/', 'module'],
-          ['/^src/'],
+          [
+            '/^@adapters/',
+            '/^@config/',
+            '/^@core/',
+            '/^@grpc/',
+            '/^@modules/',
+            '/^@ports/',
+          ],
           ['parent', 'sibling', 'index'],
         ],
         alphabetize: { order: 'asc', ignoreCase: true },

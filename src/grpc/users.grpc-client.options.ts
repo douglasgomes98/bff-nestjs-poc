@@ -1,6 +1,6 @@
 import { join } from 'path';
 
-import { makeGrpcClientOptions } from 'src/grpc/grpc-client.options';
+import { makeGrpcClientOptions } from '@grpc/grpc-client.options';
 
 import { USERS_PACKAGE_NAME } from './generated/users';
 

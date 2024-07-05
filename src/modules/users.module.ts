@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
-import { UsersDataSourceGRPC } from 'src/adapters/users-grpc.data-source';
-import { UsersService } from 'src/core/users.service';
-import { GrpcModule } from 'src/grpc/grpc.module';
-import { UsersResolver } from 'src/ports/users.resolver';
+import { UsersDataSourceGRPC } from '@adapters/users-grpc.data-source';
+import { UsersService } from '@core/users.service';
+import { GrpcModule } from '@grpc/grpc.module';
+import { UsersResolver } from '@ports/users.resolver';
 
 import { AgenciesModule } from './agencies.module';
 

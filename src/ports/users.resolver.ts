@@ -1,6 +1,6 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 
-import { AgenciesService } from 'src/core/agencies.service';
+import { AgenciesService } from '@core/agencies.service';
 
 import { UsersService } from '../core/users.service';
 import { UserType } from './users.types';
