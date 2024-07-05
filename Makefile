@@ -13,3 +13,6 @@ proto:
 	--ts_proto_opt=unrecognizedEnum=false,stringEnums=true,snakeToCamel=false \
 	--ts_proto_opt=nestJs=true,addGrpcMetadata=true,returnObservable=true,lowerCaseServiceMethods=false
 	pnpm prettier --write src/grpc/generated
+
+container: deps proto
+	docker build -t bff-nestjs .
