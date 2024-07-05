@@ -1,6 +1,7 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
-import { AgenciesService } from '../core/agencies.service';
+import { AgenciesService } from '@core/agencies.service';
+
 import { AgencyType } from './agencies.types';
 
 @Resolver(() => AgencyType)

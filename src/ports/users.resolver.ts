@@ -1,8 +1,8 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 
 import { AgenciesService } from '@core/agencies.service';
+import { UsersService } from '@core/users.service';
 
-import { UsersService } from '../core/users.service';
 import { UserType } from './users.types';
 
 @Resolver(() => UserType)
