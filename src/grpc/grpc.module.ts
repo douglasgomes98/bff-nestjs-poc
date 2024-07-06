@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import { ClientsModule } from '@nestjs/microservices';
 import { join } from 'path';
 
-import { EnvModule } from '@config/env.module';
-
 import { AgenciesGRPCClient } from './agencies.grpc-client';
 import { AGENCIES_PACKAGE_NAME } from './generated/agencies';
 import { USERS_PACKAGE_NAME } from './generated/users';
@@ -12,7 +10,6 @@ import { UsersGRPCClient } from './users.grpc-client';
 
 @Module({
   imports: [
-    EnvModule,
     ClientsModule.registerAsync([
       makeGrpcClient({
         packageName: USERS_PACKAGE_NAME,

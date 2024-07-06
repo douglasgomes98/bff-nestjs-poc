@@ -5,8 +5,9 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 
-import { EnvModule } from '@config/env.module';
-import { envValidator } from '@config/env.validator';
+import { EnvModule } from '@config/env/env.module';
+import { envValidator } from '@config/env/env.validator';
+import { AuthModule } from '@modules/auth.module';
 
 import { GrpcModule } from './grpc/grpc.module';
 import { AgenciesModule } from './modules/agencies.module';
@@ -20,6 +21,7 @@ import { UsersModule } from './modules/users.module';
     }),
     EnvModule,
     GrpcModule,
+    AuthModule,
     AgenciesModule,
     UsersModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -28,6 +30,7 @@ import { UsersModule } from './modules/users.module';
       autoSchemaFile: join(process.cwd(), 'schema.gql'),
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
+      context: ({ req }) => ({ req }),
     }),
   ],
 })

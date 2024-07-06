@@ -10,5 +10,6 @@ import { AgenciesModule } from './agencies.module';
 @Module({
   imports: [GrpcModule, AgenciesModule],
   providers: [UsersResolver, UsersService, UsersDataSourceGRPC],
+  exports: [UsersService],
 })
 export class UsersModule {}

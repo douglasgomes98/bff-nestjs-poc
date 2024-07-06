@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 
-import { EnvService } from '@config/env.service';
+import { EnvService } from '@config/env/env.service';
 
 import { AppModule } from './app.module';
 

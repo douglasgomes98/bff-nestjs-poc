@@ -1,9 +1,9 @@
 import { ClientsProviderAsyncOptions, Transport } from '@nestjs/microservices';
 import { join } from 'path';
 
-import { EnvModule } from '@config/env.module';
-import { EnvService } from '@config/env.service';
-import { Env } from '@config/env.validator';
+import { EnvModule } from '@config/env/env.module';
+import { EnvService } from '@config/env/env.service';
+import { Env } from '@config/env/env.validator';
 import { ReflectionService } from '@grpc/reflection';
 
 type KeysMatching<T, V> = {

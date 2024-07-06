@@ -3,6 +3,7 @@ import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { AgenciesService } from '@core/agencies.service';
 import { UsersService } from '@core/users.service';
 
+import { AuthGuard } from './auth.resolver.guard';
 import { UserType } from './users.types';
 
 @Resolver(() => UserType)
@@ -12,6 +13,7 @@ export class UsersResolver {
     private readonly agenciesService: AgenciesService,
   ) {}
 
+  @AuthGuard()
   @Query(() => [UserType])
   async listUsers() {
     const { users } = await this.usersService.listUsers();
