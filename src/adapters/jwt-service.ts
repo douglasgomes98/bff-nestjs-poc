@@ -17,14 +17,14 @@ interface PublicKey {
   alg: Algorithm;
 }
 
-interface Payload {
+interface UserJwtPayload {
   email: string;
   name: string;
   family_name: string;
   given_name: string;
   phone_number: string;
-  agency_id: string;
-  user_id: string;
+  agency_id: number;
+  user_id: number;
   language: string;
   timezone: string;
   consolidator_currency: string;
@@ -35,7 +35,7 @@ interface Payload {
 export class JwtService {
   constructor(private readonly envService: EnvService) {}
 
-  async validateToken(token: string): Promise<Payload> {
+  async validateToken(token: string): Promise<UserJwtPayload> {
     const { pem, alg } = await this.getPublicKey();
     const jwtPayload = jwt.verify(token, pem, { algorithms: [alg] });
 

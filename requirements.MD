@@ -1,9 +1,9 @@
-[] - authentication
+[x] - authentication
 [] - stream / upload de arquivos
-[] - sse
+[] - enviar metadata com user e transaction_id
 [x] - module federation
 [x] - proto
 [x] - docker
-[] - enviar metadata com user e transaction_id
+[] - sse
 [] - error handling
-[] - logger
+[x] - logger

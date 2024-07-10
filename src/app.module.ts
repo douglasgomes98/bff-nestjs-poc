@@ -1,13 +1,16 @@
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 
 import { EnvModule } from '@config/env/env.module';
 import { envValidator } from '@config/env/env.validator';
+import { AuthMiddleware } from '@core/auth.middleware';
 import { AuthModule } from '@modules/auth.module';
+import { ResolverPluginsModule } from '@modules/resolver-plugins.module';
+import { contextResolver } from '@ports/resolver.context';
 
 import { GrpcModule } from './grpc/grpc.module';
 import { AgenciesModule } from './modules/agencies.module';
@@ -24,14 +27,19 @@ import { UsersModule } from './modules/users.module';
     AuthModule,
     AgenciesModule,
     UsersModule,
+    ResolverPluginsModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      include: [AgenciesModule, UsersModule],
+      include: [ResolverPluginsModule, AgenciesModule, UsersModule],
       autoSchemaFile: join(process.cwd(), 'schema.gql'),
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      context: ({ req }) => ({ req }),
+      context: contextResolver,
     }),
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AuthMiddleware).forRoutes('*');
+  }
+}

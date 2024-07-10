@@ -1,9 +1,11 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 
 import { AgenciesService } from '@core/agencies.service';
+import { LoggedUser } from '@core/auth.service';
 import { UsersService } from '@core/users.service';
 
-import { AuthGuard } from './auth.resolver.guard';
+import { AuthResolverGuard } from './resolver.auth-guard';
+import { User } from './resolver.decorators';
 import { UserType } from './users.types';
 
 @Resolver(() => UserType)
@@ -13,7 +15,17 @@ export class UsersResolver {
     private readonly agenciesService: AgenciesService,
   ) {}
 
-  @AuthGuard()
+  @AuthResolverGuard()
+  @Query(() => UserType)
+  async me(@User() loggedUser: LoggedUser) {
+    const { user } = await this.usersService.getUserById({
+      id: String(loggedUser.id),
+    });
+
+    return user;
+  }
+
+  @AuthResolverGuard()
   @Query(() => [UserType])
   async listUsers() {
     const { users } = await this.usersService.listUsers();

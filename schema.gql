@@ -26,6 +26,7 @@ enum RoleType {
 }
 
 type Query {
+  me: UserType!
   listUsers: [UserType!]!
   getUserById(id: String!): UserType!
   listAgencies: [AgencyType!]!
