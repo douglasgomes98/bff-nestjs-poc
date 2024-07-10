@@ -1,7 +1,8 @@
 import { Injectable, Scope } from '@nestjs/common';
-import * as Dataloader from 'dataloader';
+import Dataloader from 'dataloader';
 import { lastValueFrom } from 'rxjs';
 
+import { ContextService } from '@core/context.service';
 import {
   GetUserRequest,
   GetUserResponse,
@@ -9,11 +10,17 @@ import {
 } from '@grpc/generated/users';
 import { UsersGRPCClient } from '@grpc/users.grpc-client';
 
+import { DataSourceGRPC } from './grpc.data-source';
+
 @Injectable({ scope: Scope.REQUEST })
-export class UsersDataSourceGRPC {
+export class UsersDataSourceGRPC extends DataSourceGRPC {
   private loader: Dataloader<string, GetUserResponse | null, string>;
 
-  constructor(private readonly client: UsersGRPCClient) {
+  constructor(
+    private readonly client: UsersGRPCClient,
+    contextService: ContextService,
+  ) {
+    super(contextService);
     this.loader = new Dataloader<string, GetUserResponse | null, string>(
       async (keys) => {
         const items = await Promise.all(
@@ -28,11 +35,15 @@ export class UsersDataSourceGRPC {
   }
 
   private getUserById(request: GetUserRequest): Promise<GetUserResponse> {
-    return lastValueFrom(this.client.getMethods().GetUser(request));
+    return lastValueFrom(
+      this.client.getMethods().GetUser(request, this.createMetadata()),
+    );
   }
 
   listUsers(): Promise<ListUsersResponse> {
-    return lastValueFrom(this.client.getMethods().ListUsers({}));
+    return lastValueFrom(
+      this.client.getMethods().ListUsers({}, this.createMetadata()),
+    );
   }
 
   getUser(request: GetUserRequest): Promise<GetUserResponse> {

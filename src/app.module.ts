@@ -8,7 +8,9 @@ import { join } from 'path';
 import { EnvModule } from '@config/env/env.module';
 import { envValidator } from '@config/env/env.validator';
 import { AuthMiddleware } from '@core/auth.middleware';
+import { ContextMiddleware } from '@core/context.middleware';
 import { AuthModule } from '@modules/auth.module';
+import { CommonModule } from '@modules/common.module';
 import { ResolverPluginsModule } from '@modules/resolver-plugins.module';
 import { contextResolver } from '@ports/resolver.context';
 
@@ -23,6 +25,7 @@ import { UsersModule } from './modules/users.module';
       validate: (env) => envValidator.parse(env),
     }),
     EnvModule,
+    CommonModule,
     GrpcModule,
     AuthModule,
     AgenciesModule,
@@ -41,5 +44,6 @@ import { UsersModule } from './modules/users.module';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(AuthMiddleware).forRoutes('*');
+    consumer.apply(ContextMiddleware).forRoutes('*');
   }
 }

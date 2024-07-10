@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import type { Algorithm } from 'jsonwebtoken';
-import * as jwt from 'jsonwebtoken';
-import * as jwkToPem from 'jwk-to-pem';
+import jwt from 'jsonwebtoken';
+import jwkToPem from 'jwk-to-pem';
 
 import { EnvService } from '@config/env/env.service';
 
