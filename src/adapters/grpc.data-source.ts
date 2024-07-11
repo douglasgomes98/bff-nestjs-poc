@@ -1,3 +1,5 @@
+import removeAccents from 'remove-accents';
+
 import { ContextService } from '@core/context.service';
 import { Metadata } from '@grpc/grpc-js';
 
@@ -15,7 +17,7 @@ export abstract class DataSourceGRPC {
     metadata.add('useragent', JSON.stringify(useragent));
 
     if (user) {
-      metadata.add('user', JSON.stringify(user));
+      metadata.add('user', removeAccents(JSON.stringify(user)));
     }
 
     return metadata;

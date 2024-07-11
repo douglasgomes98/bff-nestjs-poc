@@ -1,9 +1,9 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Details } from 'express-useragent';
 
 import { LoggedUser } from './auth.service';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class ContextService {
   private transaction: string;
   private useragent: Details;

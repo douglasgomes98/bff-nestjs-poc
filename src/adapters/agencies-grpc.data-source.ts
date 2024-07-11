@@ -1,4 +1,4 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import Dataloader from 'dataloader';
 import { lastValueFrom } from 'rxjs';
 
@@ -12,7 +12,7 @@ import {
 
 import { DataSourceGRPC } from './grpc.data-source';
 
-@Injectable({ scope: Scope.REQUEST })
+@Injectable()
 export class AgenciesDataSourceGRPC extends DataSourceGRPC {
   private loader: Dataloader<string, GetAgencyResponse | null, string>;
 
